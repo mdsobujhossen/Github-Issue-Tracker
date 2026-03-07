@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github issue tracker</title>
+
+    <!-- tailwind and daisy ui cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- google font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style/index.css">
+</head>
+
+<body class="">
+
+    <main class="  bg-[#F8FAFC] p-10">
+        <div class="max-w-105 mx-auto bg-white shadow-md p-5 text-center rounded-md space-y-5">
+            <div>
+                <img class="max-w-25 mx-auto" src="assets/github-logo.png" alt="">
+                <h2 class="text-2xl font-semibold text-[#1F2937] mt-5">GitHub Issues Tracker</h2>
+                <p class="text-[#64748B]">Sign in to manage your issues</p>
+            </div>
+
+            <!-- login form -->
+            <fieldset class="fieldset w-full  border-base-300 rounded-box  ">
+
+                <label class="label">Username</label>
+                <input id="userName-input" type="text" class="input w-full" placeholder="Enter Username" value="admin" />
+
+                <label class="label">Password</label>
+                <input id="password-input" type="password" class="input w-full" placeholder="Enter Password" value="admin123"/>
+
+                <button onclick="logIn()" id="log-in-btn" type="submit" class="btn btn-primary rounded-md mt-4">Login</button>
+            </fieldset>
+
+            <!-- demo credential -->
+            <div class="flex items-center gap-2">
+                <div class="h-[1px] flex-grow bg-gray-300"></div>
+                <span>OR</span>
+                <div class="h-[1px] flex-grow bg-gray-300"></div>
+            </div>
+
+            <div>
+                <p class="text-[#64748B]">Demo Credentials:</p>
+                <div class="bg-[#F8FAFC] mt-8 p-6 rounded-md">
+                    <p class="">
+                        <span class="font-semibold">Username:</span> admin
+                    </p>
+                    <p class="">
+                        <span class="font-semibold">Password:</span> admin123
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="script/index.js"></script>
+</body>
+
+</html>
