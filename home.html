@@ -44,9 +44,9 @@
     <main class="container w-11/12 mx-auto mt-10">
         <!-- tab section -->
         <section class="space-x-2 bg-white p-5 rounded-lg shadow mb-5">
-            <button class="btn btn-primary ">All</button>
-            <button class="btn">Open</button>
-            <button class="btn">Closed</button>
+            <button id="all-tab-btn" class="btn btn-primary ">All</button>
+            <button id="open-tab-btn" class="btn">Open</button>
+            <button id="closed-tab-btn" class="btn">Closed</button>
         </section>
 
         <!-- issue counter section -->
@@ -68,18 +68,20 @@
 
         <!-- card container -->
         <section>
-            <div id="card-container" class="grid grid-cols-2 lg:grid-cols-4 gap-3 p-5 bg-[#FBFBFB] shadow border-t border-gray-300">
+            <div id="card-container"
+                class="grid grid-cols-2 lg:grid-cols-4 gap-3 p-5 bg-[#FBFBFB] shadow border-t border-gray-300">
 
                 <!-- single card -->
-                <div class=" border-t-2 border-[#00A96E] rounded-sm bg-white shadow py-4">
+                <!-- <div class=" border-t-2 border-[#00A96E] rounded-sm bg-white shadow py-4 flex flex-col justify-between"> -->
                     <!-- status top -->
-                    <div class="flex justify-between px-3 mb-3">
+                    <!-- <div class="flex justify-between px-3 mb-3">
                         <img src="assets/Open-Status.png" alt="">
                         <div class="badge badge-soft badge-secondary rounded-full">Secondary</div>
-                    </div>
+                    </div> -->
                     <!-- info middle -->
-                    <div class="px-3 space-y-2">
-                        <h2 class="text-[#1F2937] text-[14px] font-semibold ">Fix navigation menu on mobile devices</h2>
+                    <!-- <div class="px-3 space-y-2">
+                        <h2 class="text-[#1F2937] text-[14px] font-semibold line-clamp-2 ">Fix navigation menu on mobile
+                            devicesFix navigation menu on mobile devices</h2>
                         <p class="text-[#64748B] text-[12px]">Track and manage your project issues</p>
                         <div class="mt-4">
                             <div
@@ -91,20 +93,23 @@
                                 <img class="w-3" src="assets/Lifebuoy.png" alt=""> Help Wanted
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- bottom created info -->
-                    <div class="border-t border-gray-300 mt-4 px-3 pt-3 space-y-1">
+                    <!-- <div class="border-t border-gray-300 mt-4 px-3 pt-3 space-y-1">
                         <p class="text-[#64748B] text-[12px]">#1
                             by john_doe</p>
                         <p class="text-[#64748B] text-[12px]">1/15/2024</p>
-                        
-                    </div>
-                </div>
+
+                    </div> -->
+                <!-- </div> -->
 
             </div>
         </section>
     </main>
+
+
+    <script src="script/home.js"></script>
 </body>
 
 </html>
