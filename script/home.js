@@ -27,12 +27,11 @@ const allIssues = []
 
 // open issue modal
 const openIssueModal = async (issueId) => {
-    console.log(issueId);
+    showLoadingSpinner()
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${issueId}`
     const res = await fetch(url)
     const data = await res.json()
     const issueDetails = data.data;
-    console.log(issueDetails);
 
     issueDetailsModal.innerHTML = `
             <div class="modal-box">
@@ -67,12 +66,10 @@ const openIssueModal = async (issueId) => {
             </form>
     `
 
-
+    hideLoadingSpinner()
     issueDetailsModal.showModal()
 
 }
-
-
 
 // shw loading spinner
 const showLoadingSpinner = () => {
@@ -160,10 +157,6 @@ const loadFilterissue = (allIssue) => {
 }
 
 
-
-
-
-
 // object
 //     "id": 1,
 //     "title": "Fix navigation menu on mobile devices",
@@ -229,6 +222,7 @@ function updateIssueCount() {
 
 // tab selection
 const selectTab = (tab) => {
+    showLoadingSpinner()
     allTabs.forEach(item => {
         const singleTab = document.getElementById(item);
         singleTab.classList.remove("btn-primary")
@@ -249,6 +243,7 @@ const selectTab = (tab) => {
         const closedIssue = allIssues.filter(issue => issue.status == "closed")
         displayIssue(closedIssue)
     }
+    hideLoadingSpinner()
 }
 
 
@@ -257,6 +252,7 @@ const searchInput = document.getElementById("search-input")
 const searchBtn = document.getElementById("search-btn")
 
 searchBtn.addEventListener("click", async()=>{
+    showLoadingSpinner()
     allTabs.forEach(item => {
         const singleTab = document.getElementById(item);
         singleTab.classList.remove("btn-primary")
@@ -267,6 +263,7 @@ searchBtn.addEventListener("click", async()=>{
     const data = await res.json()
     displayIssue(data.data);
     searchInput.value = ' '
+    hideLoadingSpinner()
 })
 
 
