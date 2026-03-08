@@ -222,7 +222,6 @@ const displayIssue = (allIssue) => {
 // update counter
 function updateIssueCount() {
     issueCount.innerText = cardContainer.children.length
-    console.log(allIssues);
 
 }
 
@@ -254,7 +253,21 @@ const selectTab = (tab) => {
 
 
 
+const searchInput = document.getElementById("search-input")
+const searchBtn = document.getElementById("search-btn")
 
+searchBtn.addEventListener("click", async()=>{
+    allTabs.forEach(item => {
+        const singleTab = document.getElementById(item);
+        singleTab.classList.remove("btn-primary")
+    });
+    const searchValue = searchInput.value
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`
+    const res = await fetch(url)
+    const data = await res.json()
+    displayIssue(data.data);
+    searchInput.value = ' '
+})
 
 
 
