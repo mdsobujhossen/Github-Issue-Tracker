@@ -3,13 +3,19 @@ const openTabBtn = document.getElementById("open-tab-btn")
 const closedTabBtn = document.getElementById("closed-tab-btn")
 const cardContainer = document.getElementById("card-container")
 const issueCount = document.getElementById("issueCount")
+const spinnerContainer = document.getElementById("loading-spinner")
 const allTabs = ["all", "open", "closed"]
 const allIssues = []
-const openIssue = []
-const closedIssue  = []
 
 
-
+const showLoadingSpinner = () => {
+    spinnerContainer.classList.remove("hidden")
+    spinnerContainer.classList.add("flex")
+    
+}
+const hideLoadingSpinner = () => {
+    spinnerContainer.classList.add("hidden")
+}
 
 // priority style fucntion
 const showPriorityStyle = (priority) => {
@@ -79,22 +85,9 @@ const loadAllIssue = async () => {
 
 
 
-// const loadCard = async () => {
-//     const url2 = "https://phi-lab-server.vercel.app/api/v1/lab/issues"
-//     const res = await fetch(url2)
-//     const data = await res.json()
-//     loadOpenissue(data.data);
-// }
-
 const loadFilterissue = (allIssue) => {
     allIssue.forEach(issue => {
         allIssues.push(issue)
-        if (issue.status == "open") {
-            openIssue.push(issue)
-        }
-        else if(issue.status == "closed"){
-            closedIssue.push(issue)
-        }
     });
 }
 
@@ -121,9 +114,13 @@ const loadFilterissue = (allIssue) => {
 // 
 
 const displayIssue = (allIssue) => {
+    showLoadingSpinner()
     cardContainer.innerHTML = ''
     allIssue.forEach(issue => {
         const card = document.createElement("div")
+        card.addEventListener("click", () =>{
+            showIssueDetails.showModal()
+        })
         card.className = `issue-card border-t-4 ${issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}  rounded-sm bg-white shadow py-4 flex flex-col justify-between `
         card.innerHTML = `
         <!-- status top -->
@@ -149,6 +146,7 @@ const displayIssue = (allIssue) => {
         `
         cardContainer.append(card)
     });
+    hideLoadingSpinner()
     updateIssueCount()
 
 }
@@ -177,9 +175,11 @@ const selectTab = (tab) => {
         displayIssue(allIssues)
     }
     else if (tab == "open") {
+        const openIssue = allIssues.filter(issue => issue.status == "open")
         displayIssue(openIssue)
     }
     else if (tab == "closed") {
+        const closedIssue = allIssues.filter(issue => issue.status == "closed")
         displayIssue(closedIssue)
     }
 }
