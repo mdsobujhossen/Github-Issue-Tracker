@@ -2,57 +2,64 @@ const allTabBtn = document.getElementById("all-tab-btn")
 const openTabBtn = document.getElementById("open-tab-btn")
 const closedTabBtn = document.getElementById("closed-tab-btn")
 const cardContainer = document.getElementById("card-container")
+const issueCount = document.getElementById("issueCount")
+const allTabs = ["all", "open", "closed"]
+const allIssues = []
+const openIssue = []
+const closedIssue  = []
 
 
-// tab selection
-const selectTab = () => {
 
-}
 
-// priority fucntion
+// priority style fucntion
 const showPriorityStyle = (priority) => {
-    if(priority == "high"){
+    if (priority == "high") {
         return "badge-secondary"
     }
-    else if(priority == "medium"){
+    else if (priority == "medium") {
         return "badge-warning"
     }
-    else if(priority == "low"){
+    else if (priority == "low") {
         return "badge-primary"
     }
 }
 
 // show labels
-const showLabels = (arr) =>{
-    console.log(arr);
-    
+const showLabels = (arr) => {
     const labelsContainer = document.createElement("div")
-    labelsContainer.className = "mt-4 space-x-2"
+    labelsContainer.className = "mt-4 flex flex-wrap gap-2"
     arr.forEach(item => {
-        console.log(item);
-        
-        if(item == "bug"){
+
+        if (item == "bug") {
             const labelDiv = document.createElement("div");
             labelDiv.className = "badge badge-soft badge-warning rounded-full bg-[#FEECEC] text-[#EF4444] py-3 border border-[#FECACA]"
             labelDiv.innerHTML = `
             <img src="./assets/BugDroid.png" alt=""> Bug
-            ` 
+            `
             labelsContainer.append(labelDiv)
         }
-        else if(item == "help wanted"){
+        else if (item == "help wanted") {
             const labelDiv = document.createElement("div");
             labelDiv.className = "badge badge-soft badge-warning rounded-full bg-[#FFF8DB] text-[#D97706] py-3 border border-[#FDE68A]"
             labelDiv.innerHTML = `
             <img class="w-3" src="./assets/Lifebuoy.png" alt=""> Help Wanted
-            ` 
+            `
             labelsContainer.append(labelDiv);
         }
-        else if(item == "enhancement"){
+        else if (item == "enhancement") {
             const labelDiv = document.createElement("div");
             labelDiv.className = "badge badge-soft badge-success rounded-full bg-[#DEFCE8] text-[#00A96E] py-3 border border-[#BBF7D0]"
             labelDiv.innerHTML = `
             <img class="w-3" src="./assets/Sparkle.png" alt=""> enhancement
-            ` 
+            `
+            labelsContainer.append(labelDiv)
+        }
+        else if (item == "documentation") {
+            const labelDiv = document.createElement("div");
+            labelDiv.className = "badge badge-soft badge-success rounded-full bg-[#DEFCE8]/50 text-[#00A96E]/50 py-3 border border-[#BBF7D0]/50"
+            labelDiv.innerHTML = `
+            <img class="w-3" src="./assets/Sparkle.png" alt=""> ${item}
+            `
             labelsContainer.append(labelDiv)
         }
     });
@@ -66,8 +73,35 @@ const loadAllIssue = async () => {
     const res = await fetch(url)
     const data = await res.json()
     displayIssue(data.data);
+    loadFilterissue(data.data);
 
 }
+
+
+
+// const loadCard = async () => {
+//     const url2 = "https://phi-lab-server.vercel.app/api/v1/lab/issues"
+//     const res = await fetch(url2)
+//     const data = await res.json()
+//     loadOpenissue(data.data);
+// }
+
+const loadFilterissue = (allIssue) => {
+    allIssue.forEach(issue => {
+        allIssues.push(issue)
+        if (issue.status == "open") {
+            openIssue.push(issue)
+        }
+        else if(issue.status == "closed"){
+            closedIssue.push(issue)
+        }
+    });
+}
+
+
+
+
+
 
 // object
 //     "id": 1,
@@ -87,15 +121,14 @@ const loadAllIssue = async () => {
 // 
 
 const displayIssue = (allIssue) => {
-    console.log(allIssue);
-
+    cardContainer.innerHTML = ''
     allIssue.forEach(issue => {
         const card = document.createElement("div")
-        card.className = ` border-t-2 ${issue.status === "open"? "border-[#00A96E]" : "border-[#A855F7]"}  rounded-sm bg-white shadow py-4 flex flex-col justify-between `
+        card.className = `issue-card border-t-4 ${issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}  rounded-sm bg-white shadow py-4 flex flex-col justify-between `
         card.innerHTML = `
         <!-- status top -->
                     <div class="flex justify-between px-3 mb-3">
-                        <img src=${issue.status === "open"? "./assets/Open-Status.png" :"./assets/closed-status.png"} alt="">
+                        <img src=${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/closed-status.png"} alt="">
                         <div class="badge badge-soft ${showPriorityStyle(issue.priority)} rounded-full shadow">${issue.priority}</div>
                     </div>
                     <!-- info middle -->
@@ -116,6 +149,41 @@ const displayIssue = (allIssue) => {
         `
         cardContainer.append(card)
     });
+    updateIssueCount()
 
 }
-loadAllIssue()
+
+// update counter
+function updateIssueCount () {
+    issueCount.innerText = cardContainer.children.length
+    console.log(allIssues);
+    
+}
+
+
+
+// tab selection
+const selectTab = (tab) => {
+    allTabs.forEach(item => {
+        const singleTab = document.getElementById(item);
+        singleTab.classList.remove("btn-primary")
+    });
+    const currentTab = document.getElementById(tab)
+    currentTab.classList.add("btn-primary")
+
+
+    // show card with tab selection
+    if (tab == "all") {
+        displayIssue(allIssues)
+    }
+    else if (tab == "open") {
+        displayIssue(openIssue)
+    }
+    else if (tab == "closed") {
+        displayIssue(closedIssue)
+    }
+}
+
+
+
+loadAllIssue()  
