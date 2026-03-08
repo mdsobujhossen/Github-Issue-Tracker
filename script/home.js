@@ -4,15 +4,83 @@ const closedTabBtn = document.getElementById("closed-tab-btn")
 const cardContainer = document.getElementById("card-container")
 const issueCount = document.getElementById("issueCount")
 const spinnerContainer = document.getElementById("loading-spinner")
+const issueDetailsModal = document.getElementById("showIssueDetails")
 const allTabs = ["all", "open", "closed"]
 const allIssues = []
 
 
+
+// "id": 3,
+// "title": "Update README with installation instructions",
+// "description": "The README file needs better installation instructions for new contributors.",
+// "status": "closed",
+// "labels": [
+//     "documentation"
+// ],
+// "priority": "low",
+// "author": "mike_docs",
+// "assignee": "sarah_dev",
+// "createdAt": "2024-01-10T08:00:00Z",
+// "updatedAt": "2024-01-12T16:45:00Z"
+
+
+
+// open issue modal
+const openIssueModal = async (issueId) => {
+    console.log(issueId);
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${issueId}`
+    const res = await fetch(url)
+    const data = await res.json()
+    const issueDetails = data.data;
+    console.log(issueDetails);
+
+    issueDetailsModal.innerHTML = `
+            <div class="modal-box">
+                <h3 class="text-2xl font-semibold">${issueDetails.title}</h3>
+                <div class="flex items-center gap-2 mt-3">
+                    <div class="badge badge-success">Opened</div>
+                    <i class="fa-solid fa-circle text[#64748B] text-[4px]"></i>
+                    <p class="text-[#64748B] text-[12px] leading-3">${issueDetails.author}</p>
+                    <i class="fa-solid fa-circle text[#64748B] text-[4px]"></i>
+                    <p class="text-[#64748B] text-[12px] leading-3">${issueDetails.createdAt}</p>
+                </div>
+
+                <!-- labels -->
+                ${showLabels(issueDetails.labels)}
+
+
+                <p class="text-[#64748B] mt-6">${issueDetails.description}</p>
+                <div class="mt-6 grid grid-cols-2 bg-[#F8FAFC] p-5 rounded-lg shadow">
+                    <div>
+                        <p class="text-[#64748B]">Assignee:</p>
+                        <p class="font-semibold">${issueDetails.assignee}</p>
+                    </div>
+                    <div>
+                        <p class="text-[#64748B]">Priority:</p>
+                        <div class="badge ${showPriorityStyle(issueDetails.priority)} rounded-full">${issueDetails.priority}</div>
+                    </div>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                
+                <button>close</button>
+            </form>
+    `
+
+
+    issueDetailsModal.showModal()
+
+}
+
+
+
+// shw loading spinner
 const showLoadingSpinner = () => {
     spinnerContainer.classList.remove("hidden")
     spinnerContainer.classList.add("flex")
-    
+
 }
+// hide loading spinner
 const hideLoadingSpinner = () => {
     spinnerContainer.classList.add("hidden")
 }
@@ -118,8 +186,8 @@ const displayIssue = (allIssue) => {
     cardContainer.innerHTML = ''
     allIssue.forEach(issue => {
         const card = document.createElement("div")
-        card.addEventListener("click", () =>{
-            showIssueDetails.showModal()
+        card.addEventListener("click", () => {
+            openIssueModal(issue.id)
         })
         card.className = `issue-card border-t-4 ${issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}  rounded-sm bg-white shadow py-4 flex flex-col justify-between `
         card.innerHTML = `
@@ -152,10 +220,10 @@ const displayIssue = (allIssue) => {
 }
 
 // update counter
-function updateIssueCount () {
+function updateIssueCount() {
     issueCount.innerText = cardContainer.children.length
     console.log(allIssues);
-    
+
 }
 
 

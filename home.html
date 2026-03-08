@@ -112,48 +112,8 @@
             </div>
         </section>
 
-        <!-- modal -->
-        <!-- Open the modal using ID.showModal() method -->
-        <button class="btn" onclick="showIssueDetails.showModal()">open modal</button>
-        <dialog id="showIssueDetails" class="modal modal-bottom sm:modal-middle">
-            <div class="modal-box">
-                <h3 class="text-2xl font-semibold">Fix broken image uploads!</h3>
-                <div class="flex items-center gap-2 mt-3">
-                    <div class="badge badge-success">Opened</div>
-                    <i class="fa-solid fa-circle text[#64748B] text-[4px]"></i>
-                    <p class="text-[#64748B] text-[12px] leading-3">Opened by Fahim Ahmed</p>
-                    <i class="fa-solid fa-circle text[#64748B] text-[4px]"></i>
-                    <p class="text-[#64748B] text-[12px] leading-3">22/02/2026/p>
-                </div>
-
-                <div class="mt-4">
-                    <div
-                        class="badge badge-soft badge-warning rounded-full bg-[#FEECEC] text-[#EF4444] py-3 border border-[#FECACA]">
-                        <img src="assets/BugDroid.png" alt=""> Bug
-                    </div>
-                    <div
-                        class="badge badge-soft badge-warning rounded-full bg-[#FFF8DB] text-[#D97706] py-3 border border-[#FDE68A]">
-                        <img class="w-3" src="assets/Lifebuoy.png" alt=""> Help Wanted
-                    </div>
-                </div>
-                <p class="text-[#64748B] mt-6">Track and manage your project issues</p>
-                <div class="mt-6 grid grid-cols-2 bg-[#F8FAFC] p-5 rounded-lg">
-                    <div>
-                        <p class="text-[#64748B]">Assignee:</p>
-                        <p class="font-semibold">Fahim Ahmed</p>
-                    </div>
-                    <div>
-                        <p class="text-[#64748B]">Priority:</p>
-                        <div class="badge badge-error rounded-full">High</div>
-                    </div>
-                </div>
-                <div class="modal-action">
-                    <form method="dialog">
-                        <!-- if there is a button in form, it will close the modal -->
-                        <button class="btn btn-primary">Close</button>
-                    </form>
-                </div>
-            </div>
+        <dialog id="showIssueDetails" class="modal">
+            
         </dialog>
     </main>
 
