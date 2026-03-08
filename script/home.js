@@ -189,7 +189,7 @@ const displayIssue = (allIssue) => {
         card.addEventListener("click", () => {
             openIssueModal(issue.id)
         })
-        card.className = `issue-card border-t-4 ${issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}  rounded-sm bg-white shadow py-4 flex flex-col justify-between `
+        card.className = `issue-card border-t-4 ${issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}  rounded-sm bg-white shadow py-4 flex flex-col justify-between cursor-pointer `
         card.innerHTML = `
         <!-- status top -->
                     <div class="flex justify-between px-3 mb-3">
