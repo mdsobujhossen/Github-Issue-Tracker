@@ -25,7 +25,7 @@
 
 <body class="">
 
-    <main class="  bg-[#F8FAFC] p-10">
+    <main class="  bg-[#F8FAFC] p-5 sm:p-10">
         <div class="max-w-105 mx-auto bg-white shadow-md p-5 text-center rounded-md space-y-5">
             <div>
                 <img class="max-w-25 mx-auto" src="assets/github-logo.png" alt="">
@@ -34,14 +34,16 @@
             </div>
 
             <!-- login form -->
-            <fieldset class="fieldset w-full  border-base-300 rounded-box  ">
+            <fieldset class="fieldset w-full  border-base-300 rounded-box space-y-0 ">
 
-                <label class="label">Username</label>
-                <input id="userName-input" type="text" class="input w-full" placeholder="Enter Username" value="admin" />
-
-                <label class="label">Password</label>
-                <input id="password-input" type="password" class="input w-full" placeholder="Enter Password" value="admin123"/>
-
+                <label class="label text-[16px] font-medium text-[#3D3746]">Username</label>
+                <input id="userName-input" type="text" class="shadow input w-full" placeholder="Enter Username" value="admin" />
+                <p class="text-[#4A00FF] text-left ">Default: admin</p>
+                
+                <label class="label text-[16px] font-medium text-[#3D3746] mt-2">Password</label>
+                <input id="password-input" type="password" class="input w-full  shadow" placeholder="Enter Password" value="admin123"/>
+                <p class="text-[#4A00FF] text-left">Default: admin123</p>
+                
                 <button onclick="logIn()" id="log-in-btn" type="submit" class="btn btn-primary rounded-md mt-4">Login</button>
             </fieldset>
 
