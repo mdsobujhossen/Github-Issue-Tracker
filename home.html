@@ -23,24 +23,88 @@
     <link rel="stylesheet" href="style/index.css">
 </head>
 
-<body>
+<body class="bg-[#F8FAFC]">
 
     <header class="flex justify-between container w-11/12 mx-auto">
-        <div class="flex  items-center gap-1 p-5">
+        <div class="flex  items-center gap-1 py-5">
             <img class="max-w-9" src="assets/github-logo.png" alt="">
             <h2 class="text-2xl font-semibold text-[#1F2937]">GitHub Issues Tracker</h2>
         </div>
         <div class="flex gap-4 items-center">
             <div class="relative">
                 <i class="fa-solid fa-magnifying-glass absolute top-3.5 left-4 text-[#64748B] -z-10] "></i>
-                <input class="px-5 py-2 pl-10 rounded-md text[#64748B] border border-[#64748B]" type="text" name="" id="search-input" placeholder="search issue" >
+                <input class="bg-white px-5 py-2 pl-10 rounded-md text[#64748B] border border-[#64748B]" type="text"
+                    name="" id="search-input" placeholder="search issue">
             </div>
 
             <button class="btn btn-primary">+ New issue</button>
         </div>
     </header>
 
+    <main class="container w-11/12 mx-auto mt-10">
+        <!-- tab section -->
+        <section class="space-x-2 bg-white p-5 rounded-lg shadow mb-5">
+            <button class="btn btn-primary ">All</button>
+            <button class="btn">Open</button>
+            <button class="btn">Closed</button>
+        </section>
 
+        <!-- issue counter section -->
+        <section class=" bg-white p-5 rounded-t-lg rounded-tl-lg shadow flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <img src="assets/Aperture.png" alt="">
+                <div>
+                    <p class="font-semibold">50 Issues</p>
+                    <p class="text-[#64748B]">Track and manage your project issues</p>
+                </div>
+            </div>
+
+            <div class="flex gap-5">
+                <p class="font-semibold"><i class="fa-solid fa-circle text-[#00A96E] text-[12px] pr-3"></i> Open</p>
+                <p class="font-semibold"><i class="fa-solid fa-circle text-[#A855F7] text-[12px] pr-3"></i> Closed</p>
+            </div>
+        </section>
+
+
+        <!-- card container -->
+        <section>
+            <div id="card-container" class="grid grid-cols-2 lg:grid-cols-4 gap-3 p-5 bg-[#FBFBFB] shadow border-t border-gray-300">
+
+                <!-- single card -->
+                <div class=" border-t-2 border-[#00A96E] rounded-sm bg-white shadow py-4">
+                    <!-- status top -->
+                    <div class="flex justify-between px-3 mb-3">
+                        <img src="assets/Open-Status.png" alt="">
+                        <div class="badge badge-soft badge-secondary rounded-full">Secondary</div>
+                    </div>
+                    <!-- info middle -->
+                    <div class="px-3 space-y-2">
+                        <h2 class="text-[#1F2937] text-[14px] font-semibold ">Fix navigation menu on mobile devices</h2>
+                        <p class="text-[#64748B] text-[12px]">Track and manage your project issues</p>
+                        <div class="mt-4">
+                            <div
+                                class="badge badge-soft badge-warning rounded-full bg-[#FEECEC] text-[#EF4444] py-3 border border-[#FECACA]">
+                                <img src="assets/BugDroid.png" alt=""> Bug
+                            </div>
+                            <div
+                                class="badge badge-soft badge-warning rounded-full bg-[#FFF8DB] text-[#D97706] py-3 border border-[#FDE68A]">
+                                <img class="w-3" src="assets/Lifebuoy.png" alt=""> Help Wanted
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- bottom created info -->
+                    <div class="border-t border-gray-300 mt-4 px-3 pt-3 space-y-1">
+                        <p class="text-[#64748B] text-[12px]">#1
+                            by john_doe</p>
+                        <p class="text-[#64748B] text-[12px]">1/15/2024</p>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
 </body>
 
 </html>
