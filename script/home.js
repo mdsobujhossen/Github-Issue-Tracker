@@ -8,7 +8,11 @@ const issueDetailsModal = document.getElementById("showIssueDetails")
 const allTabs = ["all", "open", "closed"]
 const allIssues = []
 
-
+// closed modal function
+const closedModal = () => {
+    const modal = document.getElementById("showIssueDetails")
+    modal.close()
+}
 
 // "id": 3,
 // "title": "Update README with installation instructions",
@@ -58,6 +62,9 @@ const openIssueModal = async (issueId) => {
                         <p class="text-[#64748B]">Priority:</p>
                         <div class="badge ${showPriorityStyle(issueDetails.priority)} rounded-full">${issueDetails.priority}</div>
                     </div>
+                </div>
+                <div class="flex justify-end mt-5">
+                    <button onclick="closedModal()" class="btn btn-primary ">close</button>
                 </div>
             </div>
             <form method="dialog" class="modal-backdrop">
