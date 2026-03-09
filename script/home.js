@@ -45,7 +45,7 @@ const openIssueModal = async (issueId) => {
                     <i class="fa-solid fa-circle text[#64748B] text-[4px]"></i>
                     <p class="text-[#64748B] text-[12px] leading-3">${issueDetails.author}</p>
                     <i class="fa-solid fa-circle text[#64748B] text-[4px]"></i>
-                    <p class="text-[#64748B] text-[12px] leading-3">${issueDetails.createdAt}</p>
+                    <p class="text-[#64748B] text-[12px] leading-3">${dateFormatting(issueDetails.createdAt)}</p>
                 </div>
 
                 <!-- labels -->
@@ -147,9 +147,11 @@ const showLabels = (arr) => {
 
 // load all issue
 const loadAllIssue = async () => {
+    showLoadingSpinner()
     const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues"
     const res = await fetch(url)
     const data = await res.json()
+    hideLoadingSpinner()
     displayIssue(data.data);
     loadFilterissue(data.data);
 
@@ -181,9 +183,14 @@ const loadFilterissue = (allIssue) => {
 //     "updatedAt": "2024-01-15T10:30:00Z"
 // 
 
+const dateFormatting = (date) => {
+    return new Date(date).toLocaleDateString("en-GB")
+}
+
+
+
 const displayIssue = (allIssue) => {
     cardContainer.innerHTML = ''
-    showLoadingSpinner()
 
     if(allIssue.length < 1){
         const div = document.createElement("div")
@@ -220,13 +227,12 @@ const displayIssue = (allIssue) => {
                     <!-- bottom created info -->
                     <div class="border-t border-gray-300 mt-4 px-3 pt-3 space-y-1">
                         <p class="text-[#64748B] text-[12px]">${issue.author}</p>
-                        <p class="text-[#64748B] text-[12px]">${issue.createdAt}</p>
+                        <p class="text-[#64748B] text-[12px]">${dateFormatting(issue.createdAt)}</p>
                         
                     </div>
         `
         cardContainer.append(card)
     });
-    hideLoadingSpinner()
     updateIssueCount()
 
 }
