@@ -182,8 +182,20 @@ const loadFilterissue = (allIssue) => {
 // 
 
 const displayIssue = (allIssue) => {
-    showLoadingSpinner()
     cardContainer.innerHTML = ''
+    showLoadingSpinner()
+
+    if(allIssue.length < 1){
+        const div = document.createElement("div")
+        div.className = "p-20 bg-white shadow flex justify-center items-center col-span-4 "
+
+        div.innerHTML = `
+                <h3 class="text-2xl font-semibold text-gray-600">Issue not found</h3>
+        `
+        cardContainer.append(div)
+        return
+    }
+
     allIssue.forEach(issue => {
         const card = document.createElement("div")
         card.addEventListener("click", () => {
